@@ -1,0 +1,31 @@
+version: "3.4"
+
+services:
+  nginx:
+    image: nginx:1.19-alpine
+    volumes:
+      - .:/var/www/html/public
+      - ./docker/nginx/conf.d:/etc/nginx/conf.d
+    ports:
+      - "80:80"
+
+  app:
+    build: .
+    volumes:
+      - .:/var/www/html/public
+    # depends_on:
+    #   - mysql
+
+ # mysql:
+ #   image: mysql:8.0
+ #   volumes:
+ #     - db:/var/lib/mysql
+ #   environment:
+ #     MYSQL_DATABASE: laravel
+ #     MYSQL_ROOT_PASSWORD: secret
+ #   ports:
+ #     - "3316:3306"
+
+volumes:
+  db:
+  composer-cache:
